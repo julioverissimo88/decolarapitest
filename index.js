@@ -18,7 +18,6 @@ file.once('open', async function (fd) {
         let result = await axios.get(`https://www.decolar.com/suggestions?locale=pt-BR&profile=sbox-cp-vh&hint=${iterator}&fields=city`);
 
         for (const item of result.data.items) {
-            console.log('item', item)
             for (const it of item.items) {
                 file.write(`${it.target.id};${it.target.gid};${it.target.code};${it.target.type};${JSON.stringify(it.target.parents)};${it.display};higlight;${JSON.stringify(it.location)}`);
                 file.write("\n");
@@ -32,7 +31,6 @@ file.once('open', async function (fd) {
 function loop(init) {
     let prefix = [];
     var temp = init;
-    console.log(init);
     while (true) {
         temp = generate(temp);
         if (temp == init) break;
